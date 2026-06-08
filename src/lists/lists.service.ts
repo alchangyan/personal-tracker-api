@@ -16,8 +16,8 @@ export class ListsService {
     return createdList;
   }
 
-  async findAll(): Promise<List[]> {
-    return this.listModel.find().exec();
+  async findAll(boardId: string): Promise<List[]> {
+    return this.listModel.find({ boardId }).populate('cards').exec();
   }
 
   async findOne(id: string): Promise<List> {
