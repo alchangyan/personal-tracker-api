@@ -1,0 +1,14 @@
+import { Controller, Get, Body, Param, UseGuards } from '@nestjs/common';
+import { UsersService } from './users.service';
+import { JwtGuard } from '../jwt/jwt.guard';
+
+@Controller('users')
+export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
+
+  @UseGuards(JwtGuard)
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.usersService.findById(id);
+  }
+}
